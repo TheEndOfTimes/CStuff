@@ -18,12 +18,12 @@ crawling(char* url, int hopsLimit){
 
 	pListStart = malloc(sizeof(struct listNode));
 	 if(pListStart == NULL){
-    //	fprintf(stderr, "ERROR: could not allocate memory\n");
+  	fprintf(stderr, "ERROR: could not allocate memory\n");
     	return -2;
 	}
 	strncpy(startAddr, url, MAX_ADDR_LENGTH);
-  //startAddr[MAX_ADDR_LENGTH - 1] = '\0';
-  //strncpy(pListStart->addr, startAddr, MAX_ADDR_LENGTH);
+  startAddr[MAX_ADDR_LENGTH - 1] = '\0';
+  strncpy(pListStart->addr, startAddr, MAX_ADDR_LENGTH);
   pListStart->next = NULL;
 
 
@@ -32,13 +32,13 @@ crawling(char* url, int hopsLimit){
     int res = getLink(startAddr, destAddr, MAX_ADDR_LENGTH);
 
     if(!res){
-    //  printf("Dead end on hop %d: no outgoing links\n", hopNum);
+      printf("Dead end on hop %d: no outgoing links\n", hopNum);
       break;
     }
 
     if(contains(pListStart, destAddr)){
-     // printf("Cycle detected on hop %d: address %s\n", hopNum,
-	     //destAddr);
+      printf("Cycle detected on hop %d: address %s\n", hopNum,
+	     destAddr);
       hopNum--; // try again for this hop in the next iteration
     }
     else{
