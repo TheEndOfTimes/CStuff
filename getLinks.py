@@ -31,9 +31,9 @@ try:
 
 except socket.error, e:
     # A socket error: that's okay
-    x=7;
+    
 except IOError, e:
     if e.errno == errno.EPIPE:
-        x=7;
+        
     else:
         print "IOError"
